@@ -79,6 +79,16 @@ detecta que encajan con lo que pides.
     ├── scripts/          <- scripts reutilizables
     └── assets/           <- plantillas, iconos, etc.
 
+  Claude no carga todos los ficheros de golpe. Solo lee
+  SKILL.md al activarse, y accede a references/ o scripts/
+  cuando el propio SKILL.md le indica que los necesita.
+  Esto se llama "progressive disclosure": el SKILL.md es
+  ligero y delega los detalles en ficheros separados.
+
+  Ejemplo en SKILL.md:
+    "Para calcular X usa scripts/calcular.js"
+    "Si necesitas contexto sobre Y lee references/guia.md"
+
   Frontmatter relevante:
     name: nombre-skill
     description: cuando usarla y que hace
