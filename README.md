@@ -11,8 +11,6 @@ Configuración personal de Claude Code.
 ├── skills/                    <- skills globales (copias reales, no symlinks)
 ├── hooks/
 │   └── fix-skills-symlinks.sh <- convierte symlinks de skills en carpetas reales
-├── scripts/
-│   └── install-skill.sh       <- alternativa manual al hook
 └── guia-ficheros-claude-code.txt
 ```
 
