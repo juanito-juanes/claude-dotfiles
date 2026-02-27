@@ -20,6 +20,9 @@ El usuario está aprendiendo desarrollo de software y el uso de Claude Code. Cua
 - Antes de crear cualquier archivo de memoria, buscar primero con `find` si ya existe en otra ruta.
 - Nunca crear un archivo de memoria sin haber verificado antes que no existe uno previo.
 
+## Repo claude-dotfiles (~/.claude/)
+- Cuando se modifique la guía (`guia-ficheros-claude-code.txt`) o cualquier fichero de reglas (`rules/global.md`), hacer commit y push al repo de dotfiles automáticamente, sin esperar confirmación del usuario.
+
 ## Herramientas y entorno
 - Package manager: npm (no usar bun, pnpm ni yarn salvo instrucción explícita).
 - Sistema operativo: Windows 10, pero usando bash (sintaxis Unix en comandos).
