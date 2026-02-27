@@ -180,7 +180,29 @@ que dan a Claude acceso a herramientas externas.
 
 
 ------------------------------------------------------------
-  10. OTROS
+  10. PLAN MODE (plan.md)
+------------------------------------------------------------
+
+Fichero temporal que Claude genera automaticamente al usar
+el modo plan (Plan Mode). No es de configuracion, sino el
+resultado de planificar una tarea antes de ejecutarla.
+
+  Activar Plan Mode: Shift+Tab dos veces
+  Salir de Plan Mode: Shift+Tab
+
+  Flujo:
+    1. Activas Plan Mode
+    2. Pides una tarea compleja
+    3. Claude escribe el plan en plan.md sin tocar nada
+    4. Tu lo revisas y apruebas (Ctrl+G para editarlo)
+    5. Sales de Plan Mode y Claude ejecuta
+
+  Util para tareas grandes o arriesgadas donde quieres
+  revisar el enfoque antes de que Claude modifique nada.
+
+
+------------------------------------------------------------
+  11. OTROS
 ------------------------------------------------------------
 
   keybindings.json
