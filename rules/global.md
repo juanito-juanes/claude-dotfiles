@@ -19,3 +19,4 @@ El usuario está aprendiendo desarrollo de software y el uso de Claude Code. Cua
 ## Herramientas y entorno
 - Package manager: npm (no usar bun, pnpm ni yarn salvo instrucción explícita).
 - Sistema operativo: Windows 10, pero usando bash (sintaxis Unix en comandos).
+- Cuando el usuario pregunte sobre una librería o framework externo y vaya a generar código, usa context7 automáticamente.
