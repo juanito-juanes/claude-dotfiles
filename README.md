@@ -30,23 +30,30 @@ cp ~/claude-dotfiles/hooks/fix-skills-symlinks.sh ~/.claude/hooks/fix-skills-sym
 ```
 
 ### 3. Registrar el hook en ~/.claude/settings.json
-Añadir este bloque al settings.json (no se sube al repo porque contiene tokens):
+El settings.json no se sube al repo porque puede contener tokens sensibles.
+Hay que añadir el bloque de hooks sin machacar lo que ya exista en el fichero.
+
+Pídele a Claude que lo haga con esta instrucción:
+> "Añade el hook de fix-skills-symlinks al ~/.claude/settings.json respetando
+> el contenido que ya tenga el fichero. El hook debe ejecutar
+> bash \"$HOME/.claude/hooks/fix-skills-symlinks.sh\" en el evento PostToolUse
+> con matcher Bash."
+
+O si prefieres hacerlo manualmente, el bloque a añadir dentro de la clave raíz es:
 
 ```json
-{
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash \"$HOME/.claude/hooks/fix-skills-symlinks.sh\""
-          }
-        ]
-      }
-    ]
-  }
+"hooks": {
+  "PostToolUse": [
+    {
+      "matcher": "Bash",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "bash \"$HOME/.claude/hooks/fix-skills-symlinks.sh\""
+        }
+      ]
+    }
+  ]
 }
 ```
 
