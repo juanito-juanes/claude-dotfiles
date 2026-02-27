@@ -46,6 +46,13 @@ como usuario y aplican a todos los proyectos.
 Ficheros .md con instrucciones modulares. Claude los
 carga todos al inicio. Se pueden organizar por temas.
 
+IMPORTANTE: las rules se inyectan directamente en el
+contexto del sistema, por lo que estan SIEMPRE disponibles
+desde el primer mensaje, incluso antes de que Claude
+encuentre o lea el MEMORY.md. Son el lugar correcto para
+reglas criticas que deben aplicarse en cualquier sesion
+sin excepcion (ej: "busca antes de crear archivos").
+
   [P]  .claude/rules/*.md
   [P]  .claude/rules/**/*.md            <- subdirectorios
   [U]  ~/.claude/rules/*.md
@@ -104,6 +111,11 @@ detecta que encajan con lo que pides.
 Claude mantiene aqui sus notas entre sesiones.
 El MEMORY.md se carga automaticamente (primeras 200 lineas).
 Los ficheros de detalle se leen bajo demanda.
+
+NOTA: a diferencia de las rules, el MEMORY.md depende de
+que Claude encuentre la ruta correcta. Si no lo encuentra,
+esas notas no estaran disponibles. Por eso las reglas
+criticas deben estar en rules/ (global.md), no aqui.
 
   [U]  ~/.claude/projects/<proyecto>/memory/MEMORY.md
   [U]  ~/.claude/projects/<proyecto>/memory/*.md

@@ -16,6 +16,10 @@ El usuario está aprendiendo desarrollo de software y el uso de Claude Code. Cua
 - Confirma antes de borrar archivos o carpetas.
 - Confirma antes de instalar dependencias no mencionadas explícitamente por el usuario.
 
+## Gestión de memoria
+- Antes de crear cualquier archivo de memoria, buscar primero con `find` si ya existe en otra ruta.
+- Nunca crear un archivo de memoria sin haber verificado antes que no existe uno previo.
+
 ## Herramientas y entorno
 - Package manager: npm (no usar bun, pnpm ni yarn salvo instrucción explícita).
 - Sistema operativo: Windows 10, pero usando bash (sintaxis Unix en comandos).
