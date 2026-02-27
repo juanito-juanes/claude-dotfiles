@@ -15,8 +15,14 @@ Leyenda de rutas:
   1. INSTRUCCIONES PRINCIPALES (CLAUDE.md)
 ------------------------------------------------------------
 
-El fichero mas importante. Claude lo lee al inicio de
-cada sesion y lo usa como contexto base.
+El fichero principal de instrucciones de proyecto.
+Claude lo lee al inicio de cada sesion y lo usa como
+contexto base para entender el proyecto: que es, como
+esta estructurado, que convenciones seguir, etc.
+
+No confundir con los ficheros de rules/ (como global.md),
+que definen el comportamiento general de Claude contigo
+como usuario y aplican a todos los proyectos.
 
   CLAUDE.md
     [P]  CLAUDE.md                      <- raiz del proyecto
