@@ -1,0 +1,237 @@
+============================================================
+  GUIA DE FICHEROS DE CONFIGURACION - CLAUDE CODE
+============================================================
+
+Una referencia de todos los ficheros que Claude Code
+reconoce y utiliza, organizados por categoria.
+
+Leyenda de rutas:
+  [P]  = dentro del proyecto       (.claude/ o raiz)
+  [U]  = usuario global            (~/.claude/)
+  [O]  = organizacion (IT)         (C:\Program Files\ClaudeCode\)
+
+
+------------------------------------------------------------
+  1. INSTRUCCIONES PRINCIPALES (CLAUDE.md)
+------------------------------------------------------------
+
+El fichero mas importante. Claude lo lee al inicio de
+cada sesion y lo usa como contexto base.
+
+  CLAUDE.md
+    [P]  CLAUDE.md                      <- raiz del proyecto
+    [P]  .claude/CLAUDE.md              <- alternativa en subcarpeta
+    [U]  ~/.claude/CLAUDE.md            <- aplica a todos tus proyectos
+    [O]  C:\Program Files\ClaudeCode\CLAUDE.md
+
+  CLAUDE.local.md
+    [P]  .claude/CLAUDE.local.md        <- preferencias personales,
+                                           NO se sube a git
+                                           (lo ignora automaticamente)
+
+  Nota: Claude busca CLAUDE.md subiendo por el arbol de
+  directorios, util en monorepos.
+
+
+------------------------------------------------------------
+  2. REGLAS (rules/)
+------------------------------------------------------------
+
+Ficheros .md con instrucciones modulares. Claude los
+carga todos al inicio. Se pueden organizar por temas.
+
+  [P]  .claude/rules/*.md
+  [P]  .claude/rules/**/*.md            <- subdirectorios
+  [U]  ~/.claude/rules/*.md
+
+  El nombre del fichero es libre (global.md, testing.md,
+  seguridad.md...). Puedes usar frontmatter YAML para
+  limitar una regla a ciertos ficheros:
+
+    ---
+    paths:
+      - "src/**/*.ts"
+    ---
+    Usa siempre tipos explicitos en TypeScript.
+
+
+------------------------------------------------------------
+  3. SKILLS (skills/SKILL.md)
+------------------------------------------------------------
+
+Capacidades reutilizables que Claude puede ejecutar.
+Se invocan con /nombre-skill o automaticamente si Claude
+detecta que encajan con lo que pides.
+
+  [P]  .claude/skills/<nombre>/SKILL.md
+  [U]  ~/.claude/skills/<nombre>/SKILL.md
+
+  Estructura de una skill:
+    <nombre>/
+    ├── SKILL.md          <- obligatorio (nombre + description)
+    ├── references/       <- docs de referencia
+    ├── scripts/          <- scripts reutilizables
+    └── assets/           <- plantillas, iconos, etc.
+
+  Frontmatter relevante:
+    name: nombre-skill
+    description: cuando usarla y que hace
+    disable-model-invocation: true   <- solo invocacion manual
+    user-invocable: false            <- solo Claude la invoca
+    allowed-tools: Read, Grep        <- herramientas permitidas
+
+
+------------------------------------------------------------
+  4. MEMORIA AUTOMATICA (MEMORY.md)
+------------------------------------------------------------
+
+Claude mantiene aqui sus notas entre sesiones.
+El MEMORY.md se carga automaticamente (primeras 200 lineas).
+Los ficheros de detalle se leen bajo demanda.
+
+  [U]  ~/.claude/projects/<proyecto>/memory/MEMORY.md
+  [U]  ~/.claude/projects/<proyecto>/memory/*.md
+         (debugging.md, patterns.md, etc.)
+
+
+------------------------------------------------------------
+  5. AGENTES (agents/*.md)
+------------------------------------------------------------
+
+Subagentes especializados que Claude puede delegar tareas.
+Similares a las skills pero con mayor autonomia y contexto
+propio. Aparecen en el menu /agents.
+
+  [P]  .claude/agents/<nombre>.md
+  [U]  ~/.claude/agents/<nombre>.md
+
+  Cada agente tiene su propia memoria persistente:
+  [P]  .claude/agent-memory/<nombre>/MEMORY.md
+  [U]  ~/.claude/agent-memory/<nombre>/MEMORY.md
+
+  Frontmatter relevante:
+    name: mi-agente
+    description: que hace y cuando usarlo
+    model: claude-opus-4-6
+    tools: Read, Grep, Bash
+
+
+------------------------------------------------------------
+  6. HOOKS (hooks/)
+------------------------------------------------------------
+
+Scripts que se ejecutan automaticamente en respuesta a
+eventos de Claude Code (antes/despues de usar herramientas,
+al inicio de sesion, etc.).
+
+  [P]  .claude/hooks/hooks.json        <- definicion de hooks
+  [P]  .claude/hooks/*.sh              <- scripts de los hooks
+  [U]  ~/.claude/hooks/hooks.json
+
+  Eventos disponibles:
+    PreToolUse    -> antes de ejecutar una herramienta
+    PostToolUse   -> despues de ejecutar una herramienta
+    SessionStart  -> al iniciar sesion
+    SessionStop   -> al terminar sesion
+
+
+------------------------------------------------------------
+  7. ESTILOS DE OUTPUT (output-styles/)
+------------------------------------------------------------
+
+Modifican como Claude formatea sus respuestas.
+
+  [P]  .claude/output-styles/<nombre>.md
+  [U]  ~/.claude/output-styles/<nombre>.md
+
+  Ejemplo: un estilo "pedagogico" que explique conceptos
+  paso a paso, o uno "conciso" que solo devuelva codigo.
+
+
+------------------------------------------------------------
+  8. CONFIGURACION (settings.json)
+------------------------------------------------------------
+
+  [P]  .claude/settings.json           <- compartido en git
+  [P]  .claude/settings.local.json     <- personal, NO en git
+  [U]  ~/.claude/settings.json
+  [O]  C:\Program Files\ClaudeCode\managed-settings.json
+
+  Incluye: permisos, variables de entorno, modelo, hooks
+  inline, y mas.
+
+
+------------------------------------------------------------
+  9. MCP SERVERS (.mcp.json)
+------------------------------------------------------------
+
+Configuracion de servidores MCP (Model Context Protocol),
+que dan a Claude acceso a herramientas externas.
+
+  [P]  .mcp.json                       <- en la raiz del proyecto
+  [U]  ~/.claude.json                  <- campo "mcpServers"
+  [O]  C:\Program Files\ClaudeCode\managed-mcp.json
+
+
+------------------------------------------------------------
+  10. OTROS
+------------------------------------------------------------
+
+  keybindings.json
+  [U]  ~/.claude/keybindings.json      <- atajos de teclado
+
+  .claude.json
+  [U]  ~/.claude.json                  <- preferencias internas,
+                                          historial de sesion,
+                                          OAuth
+
+
+------------------------------------------------------------
+  JERARQUIA DE PRECEDENCIA
+------------------------------------------------------------
+
+De mayor a menor prioridad:
+
+  1. Local personal     (.claude/settings.local.json)
+  2. Proyecto           (.claude/settings.json)
+  3. Usuario global     (~/.claude/settings.json)
+  4. Organizacion       (C:\Program Files\ClaudeCode\)
+
+
+------------------------------------------------------------
+  ESTRUCTURA TIPICA DE UN PROYECTO
+------------------------------------------------------------
+
+  mi-proyecto/
+  ├── CLAUDE.md
+  └── .claude/
+      ├── CLAUDE.local.md       <- personal, gitignoreado
+      ├── settings.json
+      ├── settings.local.json   <- personal, gitignoreado
+      ├── rules/
+      │   ├── general.md
+      │   └── typescript.md
+      ├── skills/
+      │   └── mi-skill/
+      │       └── SKILL.md
+      ├── agents/
+      │   └── mi-agente.md
+      └── hooks/
+          └── hooks.json
+
+  ~/.claude/                    <- configuracion global
+  ├── CLAUDE.md
+  ├── rules/
+  │   └── global.md
+  ├── skills/
+  │   ├── find-skills/          <- symlink a ~/.agents/
+  │   └── skill-creator/        <- symlink a ~/.agents/
+  └── projects/
+      └── <proyecto>/
+          └── memory/
+              └── MEMORY.md
+
+
+============================================================
+  Generado en sesion Claude Code - febrero 2026
+============================================================
