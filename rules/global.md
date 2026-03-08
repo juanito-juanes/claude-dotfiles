@@ -23,6 +23,7 @@ El usuario está aprendiendo desarrollo de software y el uso de Claude Code. Cua
 
 ## Repo claude-dotfiles (~/.claude/)
 - Cuando se modifique la guía (`guia-ficheros-claude-code.txt`) o cualquier fichero de reglas (`rules/global.md`), hacer commit y push al repo de dotfiles automáticamente, sin esperar confirmación del usuario.
+- Cuando se instale una nueva skill global o se añada/elimine un MCP server, actualizar el README.md del repo claude-dotfiles y hacer commit y push automáticamente.
 
 ## Herramientas y entorno
 - Package manager: npm (no usar bun, pnpm ni yarn salvo instrucción explícita).
