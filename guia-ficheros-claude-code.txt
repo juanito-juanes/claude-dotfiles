@@ -145,7 +145,44 @@ propio. Aparecen en el menu /agents.
 
 
 ------------------------------------------------------------
-  6. HOOKS (hooks/)
+  6. COMANDOS PERSONALIZADOS (commands/)
+------------------------------------------------------------
+
+Prompts reutilizables que se invocan con /nombre-comando
+directamente desde el chat de Claude Code. El nombre del
+fichero determina el nombre del comando (audit.md -> /audit).
+
+A diferencia de los agentes, los commands no tienen modelo
+ni herramientas propias: son simplemente instrucciones que
+se inyectan como prompt cuando los invocas.
+
+  [P]  .claude/commands/<nombre>.md    <- solo para este proyecto
+  [U]  ~/.claude/commands/<nombre>.md  <- disponibles en todos
+                                          los proyectos
+
+  Frontmatter relevante:
+    description: que hace el comando (aparece en /help)
+    argument-hint: texto de ayuda para los argumentos
+    allowed-tools: Bash(git commit:*)  <- permisos especificos
+
+  Argumentos dinamicos con $ARGUMENTS:
+    El placeholder $ARGUMENTS se sustituye por el texto
+    que escribas tras el nombre del comando. Ejemplo:
+
+      Fichero write_tests.md:
+        Escribe tests para: $ARGUMENTS
+        Convencion: usa Vitest, carpeta __tests__/
+
+      Uso: /write_tests src/hooks/use-auth.ts
+
+  Diferencia clave con skills y agentes:
+    - commands   -> prompt estatico, tu lo invocas siempre
+    - skills     -> pueden invocarse solas o bajo demanda
+    - agentes    -> autonomia propia, modelo configurable
+
+
+------------------------------------------------------------
+  7. HOOKS (hooks/)
 ------------------------------------------------------------
 
 Scripts que se ejecutan automaticamente en respuesta a
@@ -164,7 +201,7 @@ al inicio de sesion, etc.).
 
 
 ------------------------------------------------------------
-  7. ESTILOS DE OUTPUT (output-styles/)
+  8. ESTILOS DE OUTPUT (output-styles/)
 ------------------------------------------------------------
 
 Modifican como Claude formatea sus respuestas.
@@ -177,7 +214,7 @@ Modifican como Claude formatea sus respuestas.
 
 
 ------------------------------------------------------------
-  8. CONFIGURACION (settings.json)
+  9. CONFIGURACION (settings.json)
 ------------------------------------------------------------
 
   [P]  .claude/settings.json           <- compartido en git
@@ -190,7 +227,7 @@ Modifican como Claude formatea sus respuestas.
 
 
 ------------------------------------------------------------
-  9. MCP SERVERS (.mcp.json)
+  10. MCP SERVERS (.mcp.json)
 ------------------------------------------------------------
 
 Configuracion de servidores MCP (Model Context Protocol),
@@ -202,7 +239,7 @@ que dan a Claude acceso a herramientas externas.
 
 
 ------------------------------------------------------------
-  10. PLAN MODE (plan.md)
+  11. PLAN MODE (plan.md)
 ------------------------------------------------------------
 
 Fichero temporal que Claude genera automaticamente al usar
@@ -224,7 +261,7 @@ resultado de planificar una tarea antes de ejecutarla.
 
 
 ------------------------------------------------------------
-  11. OTROS
+  12. OTROS
 ------------------------------------------------------------
 
   keybindings.json
@@ -266,6 +303,9 @@ De mayor a menor prioridad:
       │       └── SKILL.md
       ├── agents/
       │   └── mi-agente.md
+      ├── commands/
+      │   ├── audit.md          <- /audit
+      │   └── write_tests.md    <- /write_tests $ARGUMENTS
       └── hooks/
           └── hooks.json
 
@@ -276,6 +316,8 @@ De mayor a menor prioridad:
   ├── skills/
   │   ├── find-skills/          <- symlink a ~/.agents/
   │   └── skill-creator/        <- symlink a ~/.agents/
+  ├── commands/                 <- comandos disponibles en
+  │   └── write_tests.md           todos los proyectos
   └── projects/
       └── <proyecto>/
           └── memory/
@@ -284,4 +326,5 @@ De mayor a menor prioridad:
 
 ============================================================
   Generado en sesion Claude Code - febrero 2026
+  Actualizado - marzo 2026 (añadida seccion commands)
 ============================================================
