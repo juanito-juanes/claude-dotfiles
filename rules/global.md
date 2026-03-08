@@ -19,6 +19,7 @@ El usuario está aprendiendo desarrollo de software y el uso de Claude Code. Cua
 ## Gestión de memoria
 - Antes de crear cualquier archivo de memoria, buscar primero con `find` si ya existe en otra ruta.
 - Nunca crear un archivo de memoria sin haber verificado antes que no existe uno previo.
+- Cuando el usuario se despida (frases como "seguimos mañana", "hasta mañana", "lo dejamos aquí", "hasta luego"), guardar automáticamente el punto de situación en el MEMORY.md del proyecto antes de responder.
 
 ## Repo claude-dotfiles (~/.claude/)
 - Cuando se modifique la guía (`guia-ficheros-claude-code.txt`) o cualquier fichero de reglas (`rules/global.md`), hacer commit y push al repo de dotfiles automáticamente, sin esperar confirmación del usuario.
