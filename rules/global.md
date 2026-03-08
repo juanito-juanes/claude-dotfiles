@@ -22,7 +22,7 @@ El usuario está aprendiendo desarrollo de software y el uso de Claude Code. Cua
 - Cuando el usuario se despida (frases como "seguimos mañana", "hasta mañana", "lo dejamos aquí", "hasta luego"), guardar automáticamente el punto de situación en el MEMORY.md del proyecto antes de responder.
 
 ## Repo claude-dotfiles (~/.claude/)
-- Cuando se modifique la guía (`guia-ficheros-claude-code.txt`) o cualquier fichero de reglas (`rules/global.md`), hacer commit y push al repo de dotfiles automáticamente, sin esperar confirmación del usuario.
+- Cuando se modifique la guía (`guia-ficheros-claude-code.txt`) o cualquier fichero de reglas (`rules/global.md`), copiar el fichero modificado a su equivalente en `~/.vscode/repos/claude-dotfiles/`, hacer commit y push automáticamente, sin esperar confirmación del usuario.
 - Cuando se instale una nueva skill global o se añada/elimine un MCP server, actualizar el README.md del repo claude-dotfiles y hacer commit y push automáticamente.
 
 ## Herramientas y entorno
