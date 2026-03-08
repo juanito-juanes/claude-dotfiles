@@ -57,6 +57,7 @@ O si prefieres hacerlo manualmente, el bloque a añadir dentro de la clave raíz
 
 ### 4. Instalar las skills globales
 ```bash
+npx skills add vercel-labs/skills --skill excalidraw-diagram -g -a claude-code -y
 npx skills add vercel-labs/skills --skill find-skills -g -a claude-code -y
 npx skills add anthropics/skills@skill-creator -g -a claude-code -y
 ```
