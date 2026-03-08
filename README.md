@@ -55,7 +55,20 @@ O si prefieres hacerlo manualmente, el bloque a añadir dentro de la clave raíz
 }
 ```
 
-### 4. Instalar las skills globales
+### 4. Configurar MCP servers
+
+El `settings.json` no se sube al repo (puede contener tokens). Los MCP servers hay que añadirlos manualmente.
+
+MCP servers activos en esta máquina:
+
+| Server | Paquete | Variable de entorno necesaria |
+|--------|---------|-------------------------------|
+| `github` | `@modelcontextprotocol/server-github` | `GITHUB_PERSONAL_ACCESS_TOKEN` |
+
+Para añadir el de GitHub, pídele a Claude:
+> "Añade el MCP server de GitHub a ~/.claude/settings.json. El comando es `npx -y @modelcontextprotocol/server-github` y necesita la env `GITHUB_PERSONAL_ACCESS_TOKEN` con mi token."
+
+### 5. Instalar las skills globales
 ```bash
 npx skills add vercel-labs/skills --skill excalidraw-diagram -g -a claude-code -y
 npx skills add vercel-labs/skills --skill find-skills -g -a claude-code -y
