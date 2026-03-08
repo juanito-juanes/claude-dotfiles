@@ -63,6 +63,7 @@ MCP servers activos en esta máquina:
 
 | Server | Paquete | Variable de entorno necesaria |
 |--------|---------|-------------------------------|
+| `context7` | `@upstash/context7-mcp` | — |
 | `github` | `@modelcontextprotocol/server-github` | `GITHUB_PERSONAL_ACCESS_TOKEN` |
 
 Para añadir el de GitHub, pídele a Claude:
