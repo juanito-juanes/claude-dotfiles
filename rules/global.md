@@ -25,6 +25,16 @@ El usuario está aprendiendo desarrollo de software y el uso de Claude Code. Cua
 - Cuando se modifique la guía (`guia-ficheros-claude-code.txt`) o cualquier fichero de reglas (`rules/global.md`), copiar el fichero modificado a su equivalente en `~/.vscode/repos/claude-dotfiles/`, hacer commit y push automáticamente, sin esperar confirmación del usuario.
 - Cuando se instale una nueva skill global o se añada/elimine un MCP server, actualizar el README.md del repo claude-dotfiles y hacer commit y push automáticamente.
 
+## Agentes personalizados en proyectos
+- Cuando crees o modifiques el `CLAUDE.md` de un proyecto, incluye siempre una sección `## Agentes` que liste los agentes disponibles en `.claude/agents/` con sus triggers explícitos: cuándo invocarlos y con qué herramienta.
+- Ejemplo de sección a incluir:
+  ```
+  ## Agentes
+  - `planner`: invocar antes de planificar cualquier implementación nueva.
+  - `code-reviewer`: invocar después de cada bloque de cambios de código.
+  - `architect`: invocar antes de decisiones de estructura o diseño técnico.
+  ```
+
 ## Herramientas y entorno
 - Package manager: npm (no usar bun, pnpm ni yarn salvo instrucción explícita).
 - Sistema operativo: Windows 10, pero usando bash (sintaxis Unix en comandos).
